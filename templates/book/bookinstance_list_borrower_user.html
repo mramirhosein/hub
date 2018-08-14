@@ -1,0 +1,44 @@
+{% extends 'shared/site.html' %}
+{% block body %}
+
+
+<div class="container">
+    <div style="margin-top: 50px;"></div>
+    <div style="margin-bottom: 100px;"></div>
+    <section class="borrowed">
+        <h1 class="text-center text-white">Borrowed books</h1>
+
+        {% if bookinstance_list %}
+        <ul>
+
+            {% for bookinst in bookinstance_list %}
+            <li class="{% if bookinst.is_overdue %}text-danger {% else %} text-white {% endif %}">
+                <a class="logout-link" href="{% url 'book:bookdetail' bookinst.book.pk %}">{{ bookinst.book.title }}</a><span>({{ bookinst.due_back }})</span>
+            </li>
+        </ul>
+
+        {% else %}
+            <p class="text-center tetx-white">There are no books borrowed.</p>
+        {% endif %}
+    </section>
+
+
+    <div style="margin-top: 50px;"></div>
+
+    <section class="borrowed text-white">
+        <h1>Private Section</h1>
+
+        {% if perms.book.can_read_private_section %}
+            <p>Here is important description to <strong>VIP</strong> Users.</p>
+        {% else %}
+            <p style="color:red;">You don't have permission to see here.</p>
+        {% endif %}
+
+        {% if perms.book.user_watcher %}
+                <small>Entered username is: <strong style="text-transform: capitalize;" class="logout-link">{{ user }}</strong></small>
+        {% else %}
+                <small style="color:red;">You don't have permission to see here.</small>
+        {% endif %}
+    </section>
+</div>
+{% endblock %}

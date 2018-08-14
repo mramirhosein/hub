@@ -1,0 +1,29 @@
+{% extends 'shared/site.html' %}
+
+{% block body %}
+<div style="margin-top: 100px;"></div>
+
+<div class="container-fluid">
+    
+    <div class="row">
+        <div class="col-md-2">
+            <ul class="sidebar-nav">
+                <li><a href="{% url 'book:index' %}">Home</a></li>
+                <li><a href="">All Books</a></li>
+                <li><a href="">All Authors</a></li>
+            </ul>
+        </div>
+        <div class="col-md-10">
+            <h1>Local Library Home</h1>
+            <h2>Dynamic Content</h2>
+            <p>The library has the following record counts:</p>
+            <ul class="list-unstyled">
+                <li><p><strong>number of books:</strong> {{ num_books }}</p></li>
+                <li><p><strong>number of instances:</strong> {{ num_inctances }}</p></li>
+                <li><p><strong>number of instance available:</strong> {{ num_instances_available }}</p></li>
+                <li><p><strong>number of authors:</strong> {{ num_author }}</p></li>
+            </ul>
+        </div>           
+    </div>
+</div>
+{% endblock %}
